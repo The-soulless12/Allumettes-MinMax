@@ -1,4 +1,6 @@
-n = 30
+import random
+
+n = 25
 
 def affichage_allumettes(nb_total, nb_prises):
     limite = 25
@@ -66,7 +68,7 @@ def meilleur_coup(prises, joueur):
 
     return meilleur_prise
 
-def tour_jeu(prises, joueur, conseils, est_humain):
+def tour_jeu(prises, joueur, conseils, hard, est_humain):
     if est_humain:
         print(f"C'est à votre tour, joueur {joueur} !")
         if conseils == "Y":
@@ -83,7 +85,13 @@ def tour_jeu(prises, joueur, conseils, est_humain):
                 print("Veuillez entrer un nombre valide.")
     else:
         print(f"C'est au tour du joueur {joueur} :")
-        prise = meilleur_coup(prises, joueur)
+        if hard == "Y":
+            prise = meilleur_coup(prises, joueur)
+        elif hard == "N":
+            while True:
+                prise = random.randint(1, 3)
+                if 1 <= prise <= 3 and prise <= (n - prises):
+                    break
         print(f"L'ordinateur prend {prise} allumette{'s' if prise > 1 else ''}.")
 
     prises += prise
@@ -95,31 +103,31 @@ def tour_jeu(prises, joueur, conseils, est_humain):
 
     return False, prises
 
-def humain_contre_pc(conseils):
+def humain_contre_pc(conseils, hard):
     prises = 0
     while True:
         print("----------------------------")
         # Tour de joueur 01 (humain)
-        fin, prises = tour_jeu(prises, 1, conseils, est_humain=True)
+        fin, prises = tour_jeu(prises, 1, conseils, hard, est_humain=True)
         if fin:
             break
         print("----------------------------")
         # Tour de joueur 02 (PC)
-        fin, prises = tour_jeu(prises, 2, conseils, est_humain=False)
+        fin, prises = tour_jeu(prises, 2, conseils, hard, est_humain=False)
         if fin:
             break
 
-def pc_contre_humain(conseils):
+def pc_contre_humain(conseils, hard):
     prises = 0
     while True:
         print("----------------------------")
         # Tour de joueur 01 (PC)
-        fin, prises = tour_jeu(prises, 1, conseils, est_humain=False)
+        fin, prises = tour_jeu(prises, 1, conseils, hard, est_humain=False)
         if fin:
             break
         print("----------------------------")
         # Tour de joueur 02 (humain)
-        fin, prises = tour_jeu(prises, 2, conseils, est_humain=True)
+        fin, prises = tour_jeu(prises, 2, conseils, hard, est_humain=True)
         if fin:
             break
 
@@ -153,11 +161,11 @@ def main():
         if choix == "1":
             conseils = activer_conseils()
             hard = activer_hard()
-            humain_contre_pc(conseils)
+            humain_contre_pc(conseils, hard)
         elif choix == "2":
             conseils = activer_conseils()
             hard = activer_hard()
-            pc_contre_humain(conseils)
+            pc_contre_humain(conseils, hard)
         elif choix == "3":
             print("Merci d'avoir joué. À bientôt !")
             break
