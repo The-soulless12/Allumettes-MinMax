@@ -8,7 +8,7 @@ Solveur du jeu des allumettes implémenté en Python, utilisant l'algorithme Min
 - Élagage α/β : L'algorithme MinMax utilise l'élagage α/β pour réduire le temps de calcul en éliminant des branches de l'arbre de décision.
   
 # Structure du Projet  
-- main.py : Contient le cœur du jeu avec la logique de l'IA, les interactions avec l'utilisateur et l'algo de MinMax.
+- main.py : Contient le cœur du jeu avec la logique de l'IA ainsi que les interactions avec l'utilisateur.
 
 # Prérequis  
 - Python version 3.x
