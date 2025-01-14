@@ -27,7 +27,7 @@ def fonction_cout(nb_total, joueur):
 def minmax(restant, profondeur, joueur, alpha, beta):
     score_actuel = fonction_cout(restant, joueur)
     
-    # Si le jeu est terminé, retourne le score
+    # Si le jeu est terminé on retourne le score
     if restant == 0:
         return score_actuel 
 
@@ -98,7 +98,7 @@ def tour_jeu(prises, joueur, conseils, hard, est_humain):
     affichage_allumettes(n, prises)
     
     if prises == n:
-        print(f"Le joueur {joueur} a perdu !")
+        print(f"{'Vous avez' if est_humain == True else 'Le PC a'} perdu !")
         return True, prises
 
     return False, prises
